@@ -1,6 +1,6 @@
 # FutureBuilder Examples - Ejemplos Prácticos
 
-Esta aplicación Flutter contiene ejemplos completos para demostrar el uso correcto e incorrecto del widget `FutureBuilder`, ideal para charlas y presentaciones técnicas.
+Esta aplicación Flutter contiene ejemplos completos para demostrar el uso correcto e incorrecto del widget `FutureBuilder`.
 
 ## 📱 Pantallas Incluidas
 
@@ -50,63 +50,3 @@ Esta aplicación Flutter contiene ejemplos completos para demostrar el uso corre
   - UI rica para estados de error
   - Botones de reintentar con diferentes estrategias
   - Consejos de buenas prácticas
-
-## 🎯 Puntos Clave para la Charla
-
-### 🚫 Errores Comunes
-1. **Future en build()**: Causa re-ejecuciones innecesarias
-2. **No manejar ConnectionState**: UI pobre durante la carga
-3. **Ignorar errores**: App se rompe sin manejo adecuado
-4. **No actualizar Future**: Datos obsoletos en la UI
-
-### ✅ Mejores Prácticas
-1. **Declarar Future fuera de build()**: En `initState()` o variables de instancia
-2. **Usar ConnectionState apropiadamente**: UI específica para cada estado
-3. **Manejar todos los casos**: Loading, error, empty, success
-4. **Implementar refresh correctamente**: Crear nuevo Future cuando sea necesario
-5. **Considerar didUpdateWidget()**: Para widgets que reciben parámetros externos
-
-## 🛠️ Servicios Incluidos
-
-### `ApiService`
-Simula llamadas a API con diferentes comportamientos:
-- `getUsers()`: Lista de usuarios (puede fallar aleatoriamente)
-- `getFastData()`: Carga rápida (0.5s)
-- `getSlowData()`: Carga lenta (5s)
-- `getUserProfile(id)`: Perfil específico de usuario
-
-### `User` Model
-Modelo simple para demostrar datos estructurados:
-```dart
-class User {
-  final int id;
-  final String name;
-  final String email;
-  final String phone;
-}
-```
-
-## 🚀 Cómo Usar en tu Charla
-
-1. **Introducción**: Mostrar la pantalla principal con todos los ejemplos
-2. **Problema**: Comenzar con "Malas Prácticas" para mostrar los problemas
-3. **Solución**: Contrastar con "Buenas Prácticas"
-4. **Estados**: Demostrar ConnectionState con cargas rápidas/lentas
-5. **Contexto**: Mostrar diferencias entre StatelessWidget y StatefulWidget
-6. **Robustez**: Terminar con manejo de errores
-
-## 📝 Notas para el Presentador
-
-- Cada pantalla tiene indicadores visuales (contadores, colores) para evidenciar los conceptos
-- Los botones de "Forzar Rebuild" ayudan a demostrar el comportamiento en tiempo real
-- Los comentarios en el código están marcados con ✅ y ❌ para facilitar la explicación
-- La app funciona sin conexión a internet (usa datos simulados)
-
-## 🔧 Configuración
-
-```bash
-flutter pub get
-flutter run
-```
-
-La aplicación está lista para ejecutarse sin dependencias externas.
