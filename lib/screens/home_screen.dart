@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FutureBuilder Examples'),
+        title: const Text('Ejemplos FutureBuilder'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Padding(
@@ -23,12 +23,6 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'Ejemplos de FutureBuilder',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
             Expanded(
               child: ListView(
                 children: [

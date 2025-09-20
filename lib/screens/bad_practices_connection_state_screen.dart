@@ -12,22 +12,44 @@ class BadPracticesConnectionStateScreen extends StatefulWidget {
 
 class _BadPracticesConnectionStateScreenState
     extends State<BadPracticesConnectionStateScreen> {
-  // ✅ BUENA PRÁCTICA: Future declarado fuera del build
-  // Esto evita que se ejecute nuevamente en cada rebuild
-  late Future<List<User>> _usersFuture;
   int _rebuildCounter = 0;
+  int _contentRepaintCounter = 0;
 
   @override
   void initState() {
     super.initState();
-    // ✅ Inicializamos el Future en initState
-    _usersFuture = ApiService.getUsers();
   }
 
   void _triggerRebuild() {
     setState(() {
       _rebuildCounter++;
     });
+  }
+
+  IconData _getStateIcon(ConnectionState state) {
+    switch (state) {
+      case ConnectionState.none:
+        return Icons.help_outline;
+      case ConnectionState.waiting:
+        return Icons.hourglass_empty;
+      case ConnectionState.active:
+        return Icons.sync;
+      case ConnectionState.done:
+        return Icons.check_circle;
+    }
+  }
+
+  Color _getStateColor(ConnectionState state) {
+    switch (state) {
+      case ConnectionState.none:
+        return Colors.grey;
+      case ConnectionState.waiting:
+        return Colors.orange;
+      case ConnectionState.active:
+        return Colors.blue;
+      case ConnectionState.done:
+        return Colors.green;
+    }
   }
 
   @override
@@ -70,23 +92,34 @@ class _BadPracticesConnectionStateScreenState
           ),
           Expanded(
             child: FutureBuilder<List<User>>(
-              future: _usersFuture,
+              future: ApiService.getUsers(),
               builder: (context, snapshot) {
-                _rebuildCounter++;
+                _contentRepaintCounter++;
+
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 20,
                     children: [
-                      const Icon(Icons.error, size: 64, color: Colors.red),
+                      Icon(
+                        _getStateIcon(snapshot.connectionState),
+                        size: 64,
+                        color: _getStateColor(snapshot.connectionState),
+                      ),
                       Text(
-                        'Contenido repintado: $_rebuildCounter',
-                        style: const TextStyle(color: Colors.red),
+                        'Cambios de ConnectionState: $_contentRepaintCounter',
+                        style: TextStyle(
+                          color: _getStateColor(snapshot.connectionState),
+                          fontWeight: FontWeight.bold,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        'Estado de conexión: ${snapshot.connectionState}',
-                        style: const TextStyle(color: Colors.red),
+                        'Estado actual: ${snapshot.connectionState.toString().split('.').last.toUpperCase()}',
+                        style: TextStyle(
+                          color: _getStateColor(snapshot.connectionState),
+                          fontSize: 16,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ],
