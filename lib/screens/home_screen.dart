@@ -1,4 +1,5 @@
 import 'package:example_future_builder/screens/bad_practices_connection_state_screen.dart';
+import 'package:example_future_builder/screens/what_solves_screen.dart';
 import 'package:example_future_builder/screens/widgets/example_card.dart';
 import 'package:flutter/material.dart';
 import 'good_practices_screen.dart';
@@ -26,6 +27,18 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
+                  ExampleCard(
+                    title: 'Qué soluciona FutureBuilder❓',
+                    subtitle: 'Uso básico de FutureBuilder',
+                    color: Colors.green,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WhatSolvesScreen(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   ExampleCard(
                     title: '✅ Buenas Prácticas',
                     subtitle: 'Future declarado fuera del build',
